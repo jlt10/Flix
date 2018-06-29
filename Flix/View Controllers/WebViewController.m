@@ -51,9 +51,7 @@
             NSURL *trailerURL = [NSURL URLWithString:self.trailerURLString];
             
             // Place the URL in a URL Request.
-            NSURLRequest *request = [NSURLRequest requestWithURL:trailerURL
-                                                     cachePolicy:NSURLRequestReloadIgnoringLocalCacheData
-                                                 timeoutInterval:10.0];
+            NSURLRequest *request = [NSURLRequest requestWithURL:trailerURL cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:10.0];
             // Load Request into WebView.
             [self.webView loadRequest:request];
             
