@@ -1,45 +1,55 @@
 //
-//  MoviesViewController.m
+//  MoviesGridViewController.m
 //  Flix
 //
-//  Created by Jamie Tan on 6/27/18.
+//  Created by Jamie Tan on 6/28/18.
 //  Copyright © 2018 jamietan. All rights reserved.
 //
 
-#import "MoviesViewController.h"
-#import "MovieCell.h"
+#import "MoviesGridViewController.h"
+#import "MovieCollectionCell.h"
 #import "UIImageView+AFNetworking.h"
 #import "DetailsViewController.h"
 
-@interface MoviesViewController () <UITableViewDataSource, UITableViewDelegate>
+@interface MoviesGridViewController () <UICollectionViewDataSource, UICollectionViewDelegate>
 
-@property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) NSArray *movies;
-@property (nonatomic, strong) UIRefreshControl *refreshControl;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
+@property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 
 @end
 
-@implementation MoviesViewController
+@implementation MoviesGridViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Additional setup
     
-    self.tableView.dataSource = self;
-    self.tableView.delegate = self;
+    self.collectionView.dataSource = self;
+    self.collectionView.delegate = self;
+    // Do any additional setup after loading the view.
     
     [self.activityIndicator startAnimating];
     [self fetchMovies];
+    UICollectionViewFlowLayout *layout = self.collectionView.collectionViewLayout;
     
-    self.refreshControl = [[UIRefreshControl alloc] init];
-    [self.refreshControl addTarget:self action:@selector(fetchMovies) forControlEvents:UIControlEventValueChanged];
-    [self.tableView insertSubview:self.refreshControl atIndex:0];
+    CGFloat spacing = 2;
+    layout.minimumInteritemSpacing = spacing;
+    layout.minimumLineSpacing = spacing;
+    
+    CGFloat postersPerRow = 2;
+    CGFloat itemWidth = (self.collectionView.frame.size.width - (postersPerRow-1)*layout.minimumInteritemSpacing - 2*2)/postersPerRow;
+    CGFloat itemHeight = itemWidth * 1.5;
+    layout.itemSize = CGSizeMake(itemWidth, itemHeight);
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
 }
 
 - (void) fetchMovies {
     
-    NSURL *url = [NSURL URLWithString:@"https://api.themoviedb.org/3/movie/now_playing?api_key=a07e22bc18f5cb106bfe4cc1f83ad8ed"];
+    NSURL *url = [NSURL URLWithString:@"https://api.themoviedb.org/3/movie/popular?api_key=a07e22bc18f5cb106bfe4cc1f83ad8ed&language=en-US&page=1"];
     NSURLRequest *request = [NSURLRequest requestWithURL:url cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:10.0];
     NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration] delegate:nil delegateQueue:[NSOperationQueue mainQueue]];
     NSURLSessionDataTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
@@ -56,7 +66,7 @@
             [self presentViewController:alert animated:YES completion:^{
                 // optional code for what happens after the alert controller has finished presenting
             }];
-
+            
         }
         else {
             
@@ -65,32 +75,21 @@
             self.movies = dataDictionary[@"results"];
             
             // Reloads table view data
-            [self.tableView reloadData];
+            [self.collectionView reloadData];
             [self.activityIndicator stopAnimating];
         }
     }];
     [task resume];
-    
-    [self.refreshControl endRefreshing];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+- (NSInteger)collectionView:(nonnull UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     return self.movies.count;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Dequeue cell
-    MovieCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MovieCell" forIndexPath:indexPath];
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
+    MovieCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"MovieCollectionCell" forIndexPath:indexPath];
     
-    // Display title and synopsis
     NSDictionary *movie = self.movies[indexPath.row];
-    cell.titleLabel.text = movie[@"title"];
-    cell.synopsisLabel.text = movie[@"overview"];
     
     // Display poster
     NSString *baseURLString = @"https://image.tmdb.org/t/p/original";
@@ -100,9 +99,9 @@
     cell.posterView.image = nil;
     NSURL *posterURL = [NSURL URLWithString:fullPosterURLString];
     [cell.posterView setImageWithURL:posterURL];
-    
     return cell;
 }
+
 
 #pragma mark - Navigation
 
@@ -110,8 +109,8 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
-    UITableViewCell *tappedCell = sender;
-    NSIndexPath *indexPath = [self.tableView indexPathForCell:tappedCell];
+    UICollectionViewCell *tappedCell = sender;
+    NSIndexPath *indexPath = [self.collectionView indexPathForCell:tappedCell];
     NSDictionary *movie = self.movies[indexPath.row];
     
     DetailsViewController *detailsViewController = [segue destinationViewController];
