@@ -19,6 +19,8 @@
 		33A71E1920E5613300DE5502 /* DetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33A71E1820E5613300DE5502 /* DetailsViewController.m */; };
 		33A71E1C20E5895700DE5502 /* MoviesGridViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33A71E1B20E5895700DE5502 /* MoviesGridViewController.m */; };
 		33A71E1F20E59F9600DE5502 /* MovieCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 33A71E1E20E59F9600DE5502 /* MovieCollectionCell.m */; };
+		33A71E2120E6A11A00DE5502 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33A71E2020E6A11A00DE5502 /* WebKit.framework */; };
+		33A71E2420E6A2A900DE5502 /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33A71E2320E6A2A900DE5502 /* WebViewController.m */; };
 		584848D7C49E5F3C93F76F56 /* libPods-FlixTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F00934B81C7F75BA9C224E4C /* libPods-FlixTests.a */; };
 		95FE9E6FEDFD754EF5E541E5 /* libPods-Flix.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7DC567E810E1EE4F916B97B9 /* libPods-Flix.a */; };
 		E8BEF99E6B3D711F9425D579 /* libPods-FlixUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 281BB1606459C44A57AAAE59 /* libPods-FlixUITests.a */; };
@@ -69,6 +71,9 @@
 		33A71E1B20E5895700DE5502 /* MoviesGridViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MoviesGridViewController.m; sourceTree = "<group>"; };
 		33A71E1D20E59F9600DE5502 /* MovieCollectionCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MovieCollectionCell.h; sourceTree = "<group>"; };
 		33A71E1E20E59F9600DE5502 /* MovieCollectionCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MovieCollectionCell.m; sourceTree = "<group>"; };
+		33A71E2020E6A11A00DE5502 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
+		33A71E2220E6A2A900DE5502 /* WebViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WebViewController.h; sourceTree = "<group>"; };
+		33A71E2320E6A2A900DE5502 /* WebViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WebViewController.m; sourceTree = "<group>"; };
 		47B87C6DA53A1EF75DFDE969 /* Pods-Flix.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Flix.release.xcconfig"; path = "Pods/Target Support Files/Pods-Flix/Pods-Flix.release.xcconfig"; sourceTree = "<group>"; };
 		7DC567E810E1EE4F916B97B9 /* libPods-Flix.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Flix.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		857BD314A93D96790936F848 /* Pods-FlixTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FlixTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-FlixTests/Pods-FlixTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -82,6 +87,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				33A71E2120E6A11A00DE5502 /* WebKit.framework in Frameworks */,
 				95FE9E6FEDFD754EF5E541E5 /* libPods-Flix.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -171,6 +177,8 @@
 				33A71E1820E5613300DE5502 /* DetailsViewController.m */,
 				33A71E1A20E5895700DE5502 /* MoviesGridViewController.h */,
 				33A71E1B20E5895700DE5502 /* MoviesGridViewController.m */,
+				33A71E2220E6A2A900DE5502 /* WebViewController.h */,
+				33A71E2320E6A2A900DE5502 /* WebViewController.m */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -209,6 +217,7 @@
 		6F9D79DB5E0E73AA927DC37E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				33A71E2020E6A11A00DE5502 /* WebKit.framework */,
 				7DC567E810E1EE4F916B97B9 /* libPods-Flix.a */,
 				F00934B81C7F75BA9C224E4C /* libPods-FlixTests.a */,
 				281BB1606459C44A57AAAE59 /* libPods-FlixUITests.a */,
@@ -409,6 +418,7 @@
 				33A71DA820E409A300DE5502 /* main.m in Sources */,
 				33A71E1920E5613300DE5502 /* DetailsViewController.m in Sources */,
 				33A71D9A20E409A200DE5502 /* AppDelegate.m in Sources */,
+				33A71E2420E6A2A900DE5502 /* WebViewController.m in Sources */,
 				33A71E1F20E59F9600DE5502 /* MovieCollectionCell.m in Sources */,
 				33A71E1620E5544E00DE5502 /* MovieCell.m in Sources */,
 				33A71DCC20E4158600DE5502 /* MoviesViewController.m in Sources */,

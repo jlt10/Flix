@@ -18,6 +18,7 @@
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (strong, nonatomic) NSArray *filteredMovies;
 @property (strong, nonatomic) IBOutlet UISearchBar *searchBar;
+//@property (nonatomic) BOOL searchBarActive;
 
 @end
 
@@ -39,7 +40,7 @@
     layout.minimumInteritemSpacing = spacing;
     layout.minimumLineSpacing = spacing;
     
-    CGFloat postersPerRow = 2;
+    CGFloat postersPerRow = 3;
     CGFloat itemWidth = (self.collectionView.frame.size.width - (postersPerRow-1)*layout.minimumInteritemSpacing - 2*2)/postersPerRow;
     CGFloat itemHeight = itemWidth * 1.5;
     layout.itemSize = CGSizeMake(itemWidth, itemHeight);
@@ -110,9 +111,8 @@
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
     
     if (searchText.length != 0) {
-        
         NSPredicate *predicate = [NSPredicate predicateWithBlock:^BOOL(NSDictionary *evaluatedObject, NSDictionary *bindings) {
-            return [evaluatedObject[@"title"] containsString:searchText];
+            return [[evaluatedObject[@"title"] uppercaseString] containsString:[searchText uppercaseString]]; // || [evaluatedObject[@"overview"] containsString:searchText];
         }];
         self.filteredMovies = [self.movies filteredArrayUsingPredicate:predicate];
         
@@ -124,6 +124,22 @@
     [self.collectionView reloadData];
     
 }
+
+- (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
+    self.searchBar.showsCancelButton = YES;
+}
+
+- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
+    self.searchBar.showsCancelButton = NO;
+    [self.searchBar resignFirstResponder];
+}
+
+//- (IBAction)onTap:(id)sender {
+//    if (self.searchBarActive) {
+//    [self.searchBar resignFirstResponder];
+//        self.searchBarActive = NO;
+//    }
+//}
 
 
 #pragma mark - Navigation

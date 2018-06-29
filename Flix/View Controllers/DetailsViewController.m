@@ -8,6 +8,7 @@
 
 #import "DetailsViewController.h"
 #import "UIImageView+AFNetworking.h"
+#import "WebViewController.h"
 
 @interface DetailsViewController ()
 @property (weak, nonatomic) IBOutlet UIImageView *backdropView;
@@ -28,7 +29,6 @@
     NSString *baseURLString = @"https://image.tmdb.org/t/p/original";
     NSString *posterURLString = self.movie[@"poster_path"];
     NSString *fullPosterURLString = [baseURLString stringByAppendingString:posterURLString];
-    NSLog(@"%@", fullPosterURLString);
     
     NSURL *posterURL = [NSURL URLWithString:fullPosterURLString];
     [self.posterView setImageWithURL:posterURL];
@@ -36,7 +36,6 @@
     // Set backdrop
     NSString *backdropURLString = self.movie[@"backdrop_path"];
     NSString *fullBackdropURLString = [baseURLString stringByAppendingString:backdropURLString];
-    NSLog(@"%@", fullBackdropURLString);
     
     NSURL *backdropURL = [NSURL URLWithString:fullBackdropURLString];
     [self.backdropView setImageWithURL:backdropURL];
@@ -57,14 +56,16 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    
+    WebViewController *webViewController = [segue destinationViewController];
+    webViewController.movieID = self.movie[@"id"];
 }
-*/
 
 @end
