@@ -123,7 +123,17 @@
                                         // do something for the failure condition
                                     }];
     
+    UIView *backgroundView = [[UIView alloc] init];
+    backgroundView.backgroundColor = [UIColor colorWithRed:0.47 green:0.54 blue:0.54 alpha:1.0];
+    cell.selectedBackgroundView = backgroundView;
+
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    //Change the selected background view of the cell.
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 #pragma mark - Navigation
