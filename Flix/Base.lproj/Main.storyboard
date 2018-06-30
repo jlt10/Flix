@@ -170,10 +170,10 @@
             </objects>
             <point key="canvasLocation" x="927" y="-742"/>
         </scene>
-        <!--Movie Details-->
+        <!--Details-->
         <scene sceneID="TZf-wM-xAQ">
             <objects>
-                <viewController title="Movie Details" id="uZC-NM-D8r" customClass="DetailsViewController" sceneMemberID="viewController">
+                <viewController title="Details" id="uZC-NM-D8r" customClass="DetailsViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="cyP-2i-kxn">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -375,6 +375,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="0wV-Ll-SQm"/>
-        <segue reference="K5z-xl-hHg"/>
+        <segue reference="gRV-qU-gAb"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -44,6 +44,16 @@
     CGFloat itemWidth = (self.collectionView.frame.size.width - (postersPerRow-1)*layout.minimumInteritemSpacing - 2*2)/postersPerRow;
     CGFloat itemHeight = itemWidth * 1.5;
     layout.itemSize = CGSizeMake(itemWidth, itemHeight);
+    
+    UINavigationBar *navigationBar = self.navigationController.navigationBar;
+    
+    NSShadow *shadow = [NSShadow new];
+    shadow.shadowColor = [[UIColor grayColor] colorWithAlphaComponent:0.5];
+    shadow.shadowOffset = CGSizeMake(2, 2);
+    shadow.shadowBlurRadius = 4;
+    navigationBar.titleTextAttributes = @{NSFontAttributeName : [UIFont boldSystemFontOfSize:22],
+                                          NSForegroundColorAttributeName : [UIColor colorWithRed:0.91 green:0.96 blue:0.98 alpha:1.0],
+                                          NSShadowAttributeName : shadow};
 }
 
 - (void)didReceiveMemoryWarning {
